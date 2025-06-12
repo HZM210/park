@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="keywords"
+          content="临时停靠，扫码移车"/>
+    <meta name="description"
+          content="临时停靠，扫码移车"/>
+    <title>临时停车，扫码移车</title>
+    <link rel="stylesheet" href="https://static.ma3you.com/dj_static/index/css/bootstrap.min.css">
+    <script defer="defer">
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?5ea4e568c81e6cbf6678064446ab4c0c";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+<div style="text-align: center;margin-top:50px">
+    
+        
+            <h1>13459316183</h1>
+            <a href="tel:13459316183" class="btn btn-success btn-lg" style="font-size:35px;margin-top:20px;">一键拨号</a>
+        
+    
+</div>
+<div style="text-align: center;margin-top:50px">
+    
+        <p style="font-family: 'STXingkai', '华文行楷', serif; font-size: 45px;">柳暗花明遇贵人</p>
+    
+    <p style="font-family: 'STXingkai', '华文行楷', serif; font-size: 45px;">车行四海皆顺路</p>
+    
+        <p style="font-family: 'STXingkai', '华文行楷', serif; font-size: 45px;">愿君此行皆安然</p>
+    
+
+
+<script>
+    function copy_tel() {
+        var ele = document.getElementById("tel_no");
+        ele.select();
+        document.execCommand('copy', false, null);
+    }
+
+    $(document).ready(function ($) {
+        // 微信分享
+        $.post('/get_wx_config/', {
+            'share_url': window.location.href
+        }, function (data) {
+            wx.config({
+                debug: false,
+                appId: data.app_id,
+                timestamp: data.timestamp,
+                nonceStr: data.nonceStr,
+                signature: data.signature,
+                jsApiList: [
+                    'updateAppMessageShareData',
+                    'updateTimelineShareData',
+                    'onMenuShareAppMessage',
+                    'onMenuShareTimeline',
+                    'previewImage',
+                ]
+            });
+
+            var doc_title = $('title').text();
+            wx.ready(function () {
+                wx.onMenuShareAppMessage({
+                    title: doc_title,
+                    desc: '输入手机号即可生成二维码,扫码就可拨号,再也不用自己输入电话号码了,避免打错号码的尴尬.',
+                    link: data.share_url,
+                    imgUrl: data.share_img_url,
+                    success: function () {
+                        console.log('好友分享设置成功')
+                    }
+                });
+
+                wx.updateTimelineShareData({
+                    title: doc_title,
+                    link: data.share_url,
+                    imgUrl: data.share_img_url,
+                    success: function () {
+                        console.log('朋友圈分享设置成功')
+                    }
+                });
+            });
+        })
+    });
+
+</script>
+</body>
+</html>
